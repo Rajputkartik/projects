@@ -1,0 +1,8 @@
+.image-container img {
+    transition: filter 0.3s ease;
+}
+
+
+.image-container img:hover {
+    filter: sepia(1) hue-rotate(-50deg) saturate(6);
+}
