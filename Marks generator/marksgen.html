@@ -1,0 +1,118 @@
+<!-- marksheet builder -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marksheet</title>
+    <script>
+        function generateMarksheet() {
+            const name = document.getElementById('name').value;
+            const rollNumber = document.getElementById('roll-number').value;
+            const subject1 = parseFloat(document.getElementById('subject1').value);
+            const subject2 = parseFloat(document.getElementById('subject2').value);
+            const subject3 = parseFloat(document.getElementById('subject3').value);
+
+            const totalMarks = subject1 + subject2 + subject3;
+            const percentage = (totalMarks / 300) * 100;
+
+            const tableBody = document.querySelector('#marksheet-table tbody');
+            tableBody.innerHTML += `
+                <tr>
+                    <td>${name}</td>
+                    <td>${rollNumber}</td>
+                    <td>${subject1}</td>
+                    <td>${subject2}</td>
+                    <td>${subject3}</td>
+                    <td>${totalMarks}</td>
+                    <td>${percentage.toFixed(2)}%</td>
+                </tr>
+            `;
+        }
+   </script>
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: circular-gradient(to right, #f8f9fa, black);
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #marksheet-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+  </style>
+</head>
+<body>
+    <h1>Marksheet Generator</h1>
+    <div id="marksheet-form">
+        <input type="text" id="name" placeholder="Enter Student Name" aria-placeholder="Enter Student Name">
+        <input type="text" id="roll-number" placeholder="Enter Roll Number">
+        <input type="number" id="subject1" placeholder="Enter Hindi Marks">
+        <input type="number" id="subject2" placeholder="Enter English Marks">
+        <input type="number" id="subject3" placeholder="Enter Maths Marks">
+        <button type="button" onclick="generateMarksheet()">Generate Marksheet</button>
+    </div>
+
+    <table id="marksheet-table">
+            <tr>
+                <th>Name</th>
+                <th>Roll Number</th>
+                <th>Hindi</th>
+                <th>English</th>
+                <th>Maths</th>
+                <th>Total Marks</th>
+                <th>Percentage</th>
+            </tr>
+        </table>
+</body>
