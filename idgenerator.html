@@ -1,0 +1,136 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>ID Card Generator by Kartik Rajput</title>
+      <style>
+          body {
+              font-family: Arial, sans-serif;
+              margin: 20px;
+              background-color: #f4f4f4;
+          }
+  
+          h2 {
+              color: #333;
+          }
+  
+          form {
+              background-color: #fff;
+              padding: 20px;
+              border-radius: 5px;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          }
+  
+          label {
+              display: block;
+              margin-bottom: 10px;
+          }
+  
+          input[type="text"],
+          input[type="number"],
+          input[type="email"],
+          input[type="file"] {
+              width: calc(100% - 22px);
+              padding: 10px;
+              margin-bottom: 15px;
+              border-radius: 5px;
+              border: 1px solid #ccc;
+          }
+  
+          input[type="submit"] {
+              background-color: #28a745;
+              color: white;
+              padding: 10px 15px;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+          }
+  
+          input[type="submit"]:hover {
+              background-color: #218838;
+          }
+      </style>
+      <script>
+          function getSelectedGender() {
+              let genderOptions = document.getElementsByName("gender");
+              for (let option of genderOptions) {
+                  if (option.checked) {
+                      return option.value;
+                    //   if no input is selected it will return other option 
+                  }
+              }
+              return "not provided"; // If no option is selected it will 'return not provided'
+          }
+  
+          function updateIdCard(event) {
+              event.preventDefault(); // Prevent form submission
+              document.getElementById("image").src = "./20221129083834791.png";
+              //   image is taken from the local storage
+              document.getElementById("nameOutput").innerText = document.getElementById("name").value;
+              document.getElementById("ageOutput").innerText = document.getElementById("age").value;
+              document.getElementById("addressOutput").innerText = document.getElementById("address").value;
+              document.getElementById("phoneOutput").innerText = document.getElementById("phone").value;
+              document.getElementById("emailOutput").innerText = document.getElementById("email").value;
+              document.getElementById("genderOutput").innerText = getSelectedGender();
+            // geting all the data from user
+              let imageInput = document.getElementById("image").files[0];
+              if (imageInput) {
+                  let reader = new FileReader();
+                  reader.onload = function (e) {
+                      document.getElementById("imageOutput").src = e.target.result;
+                  };
+                  reader.readAsDataURL(imageInput);
+              }
+            //   image is taken from user
+              alert("ID Card created successfully!");
+            //   adding popup notificatioin that tell the id is created successfully
+            }
+      </script>
+  </head>
+  <body>
+      <h2>Create Your ID Card</h2>
+      <form onsubmit="updateIdCard(event)">
+        <label for="name">Name:</label><br>
+          <input type="text" id="name" name="name" required><br>
+          
+          <label for="age">Age:</label><br>
+          <input type="number" id="age" name="age" required><br>
+          
+          <label for="address">Address:</label><br>
+          <input type="text" id="address" name="address" required><br>
+          
+          <label for="phone">Phone:</label><br>
+          <input type="text" id="phone" name="phone" required><br>
+  
+          <label for="email">Email:</label><br>
+          <input type="email" id="email" name="email" required><br>
+  
+          <label>Gender:</label><br>
+          <input type="radio" name="gender" value="Male"> Male
+          <input type="radio" name="gender" value="Female"> Female
+          <input type="radio" name="gender" value="Other"> Other<br>
+  
+          <label for="image">Upload Image:</label><br>
+          <input type="file" id="image" name="image" accept="image/*"><br>
+  
+          <input type="submit" value="Generate ID">
+          <!-- input is taken from user -->
+      </form>
+  
+      <hr>
+      <!-- hr tag is use to create a horizontal line -->
+      <!-- creating the space for the printing the id card  -->
+      <h2>Your ID Card</h2>
+      <div style="border: 1px solid #000; padding: 15px; width: 250px; text-align: center;">
+          <img src="image.jpg" id="logo" alt="logo" width="100"><br>
+        
+          <strong>Name:</strong> <span id="nameOutput"></span><br>
+          <strong>Age:</strong> <span id="ageOutput"></span><br>
+          <strong>Address:</strong> <span id="addressOutput"></span><br>
+          <strong>Phone:</strong> <span id="phoneOutput"></span><br>
+          <strong>Email:</strong> <span id="emailOutput"></span><br>
+          <strong>Gender:</strong> <span id="genderOutput"></span><br>
+      </div>
+  </body>
+  </html>
